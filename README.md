@@ -1,4 +1,4 @@
-# Format Converter Web App
+# Format Master
 
 A powerful format converter that supports JSON, XML, and YAML formats with features like formatting, minification, and tree view.
 
