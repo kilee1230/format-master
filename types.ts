@@ -1,13 +1,13 @@
-import React from 'react';
+import React from "react";
 
 export enum ActionType {
-  BEAUTIFY = 'BEAUTIFY',
-  MINIFY = 'MINIFY',
-  VALIDATE = 'VALIDATE',
-  AI_FIX = 'AI_FIX'
+  BEAUTIFY = "BEAUTIFY",
+  MINIFY = "MINIFY",
+  VALIDATE = "VALIDATE",
+  AI_FIX = "AI_FIX",
 }
 
-export type LanguageMode = 'json' | 'xml' | 'yaml';
+export type LanguageMode = "json" | "xml" | "yaml" | "jwt" | "toml";
 
 export interface EditorProps {
   value: string;

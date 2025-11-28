@@ -1,4 +1,4 @@
-import yaml from 'js-yaml';
+import yaml from "js-yaml";
 
 export const isValidYaml = (input: string): boolean => {
   try {
@@ -22,7 +22,7 @@ export const minifyYaml = (input: string): string => {
   try {
     const obj = yaml.load(input);
     // YAML doesn't really "minify" like JSON, but we can dump it with flow style
-    return yaml.dump(obj, { flowLevel: 0, indent: 0 }).replace(/\n/g, ' '); 
+    return yaml.dump(obj, { flowLevel: 0, indent: 0 }).replace(/\n/g, " ");
   } catch (e) {
     throw new Error((e as Error).message);
   }
