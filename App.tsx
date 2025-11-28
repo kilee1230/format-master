@@ -366,7 +366,7 @@ function App() {
               className="w-full lg:w-36"
             >
               AI Fix
-            </Button>*/}
+            </Button> */}
           </div>
 
           {/* RIGHT: Output */}
