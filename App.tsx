@@ -599,7 +599,7 @@ function App() {
               </div>
             )}
 
-            <div className="w-full h-px bg-gray-800 my-1 hidden lg:block" />
+            {/* <div className="w-full h-px bg-gray-800 my-1 hidden lg:block" />
 
             <Button
               variant="ai"
@@ -611,7 +611,7 @@ function App() {
               className="w-full lg:w-36"
             >
               AI Fix
-            </Button>
+            </Button> */}
           </div>
 
           {/* RIGHT: Output */}
