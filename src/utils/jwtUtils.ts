@@ -2,8 +2,11 @@
  * Decodes a base64url string to a string.
  */
 const base64UrlDecode = (str: string): string => {
+  // Remove any whitespace/newlines
+  let output = str.replace(/\s+/g, "");
+
   // Add padding if needed
-  let output = str.replace(/-/g, "+").replace(/_/g, "/");
+  output = output.replace(/-/g, "+").replace(/_/g, "/");
   switch (output.length % 4) {
     case 0:
       break;
@@ -18,14 +21,19 @@ const base64UrlDecode = (str: string): string => {
   }
 
   // Decode properly handling UTF-8 characters
-  return decodeURIComponent(
-    atob(output)
-      .split("")
-      .map(function (c) {
-        return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-      })
-      .join("")
-  );
+  try {
+    return decodeURIComponent(
+      atob(output)
+        .split("")
+        .map(function (c) {
+          return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+        })
+        .join("")
+    );
+  } catch (e) {
+    // Fallback if UTF-8 decoding fails
+    return atob(output);
+  }
 };
 
 /**
@@ -45,12 +53,22 @@ const base64UrlEncode = (bytes: Uint8Array): string => {
 
 export const isValidJwt = (token: string): boolean => {
   if (!token) return false;
-  const parts = token.split(".");
+  const cleanToken = token
+    .trim()
+    .replace(/^["']|["']$/g, "")
+    .replace(/\s+/g, "");
+  const parts = cleanToken.split(".");
   return parts.length === 3;
 };
 
 export const decodeJwt = (token: string): string => {
-  const parts = token.split(".");
+  // Clean up input: remove quotes and whitespace
+  const cleanToken = token
+    .trim()
+    .replace(/^["']|["']$/g, "")
+    .replace(/\s+/g, "");
+
+  const parts = cleanToken.split(".");
   if (parts.length !== 3) {
     throw new Error("Invalid JWT format. Expected 3 parts separated by dots.");
   }
@@ -85,7 +103,13 @@ export const verifyHmacSignature = async (
   token: string,
   secret: string
 ): Promise<boolean> => {
-  const parts = token.split(".");
+  // Clean up input
+  const cleanToken = token
+    .trim()
+    .replace(/^["']|["']$/g, "")
+    .replace(/\s+/g, "");
+
+  const parts = cleanToken.split(".");
   if (parts.length !== 3) return false;
 
   const [headerB64, payloadB64, signatureB64] = parts;
