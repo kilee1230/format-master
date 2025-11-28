@@ -1,0 +1,5 @@
+{
+  "name": "Format Master",
+  "description": "A powerful JSON beautifier and validator with AI-powered repair capabilities using Google Gemini.",
+  "requestFramePermissions": []
+}
